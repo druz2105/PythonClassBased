@@ -76,7 +76,15 @@ class Main:
         return customer, member, created
 
     @staticmethod
-    def product_get():
+    def list_all_product():
+        print(f"{'ID':^4} | {'Product Name':^20} | {'Product Price':^20} | {'Quantity':^20} |")
+        print('_' * 75)
+        for i in records.list_products_data:
+            product = Product(**i)
+            print(f"{product.ID:^4} | {product.Name:^20} | {product.Price:^20} | {product.Stock:^20} |")
+
+    def product_get(self):
+        self.list_all_product()
         query = str(input("Enter product id you want to purchase:"))
         product = records.find_product_id(query)
         if not product:
@@ -86,7 +94,8 @@ class Main:
             product = Product(**product)
         return product
 
-    def purchase_product(self, customer: Customers, product: Product) -> Order:
+    @staticmethod
+    def purchase_product(customer: Customers, product: Product) -> Order:
         quantity = int(input("Enter quantity of the product you want to purchase.:"))
         if product.Stock >= quantity:
             product_quantity = product.Stock - quantity
@@ -99,7 +108,8 @@ class Main:
         else:
             raise ValueError("Stock is not available")
 
-    def purchase_product_member(self, member: Union[Member, VIPMember], product: Product) -> Order:
+    @staticmethod
+    def purchase_product_member(member: Union[Member, VIPMember], product: Product) -> Order:
         quantity = int(input("Enter quantity of the product you want to purchase.:"))
         if product.Stock >= quantity:
             customer = member.customer
@@ -126,10 +136,13 @@ class Main:
         Total price: <the total price> (AUD)
         :return:
         """
-        print(f"{order.Customer.Name}  |     purchases      | {order.Quantity} x {order.Product.Name}")
-        print(f"Unit price:            |                    | {order.Product.Price} (AUD)")
-        print(f"{order.Customer.Name}  | gets a discount of | {order.Discounted_Rate}%")
-        print(f"Total price:           |                    | {order.Total}(AUD)")
+
+        print(f"{'Receipt': ^58}")
+        print("=" * 58)
+        print(f"{order.Customer.Name:<20} | {'purchases':<20} | {order.Quantity:<5}x{order.Product.Name:<5}")
+        print(f"{'Unit price:':<20} | {' ':<20} | {order.Product.Price:<5} {'(AUD)':<5}")
+        print(f"{order.Customer.Name:<20} | {'gets a discount of':<20} | {str(order.Discounted_Rate) + '%':<5}{'':<5}")
+        print(f"{'Total price:':<20} | {' ':<20} | {order.Total:<5} {'(AUD)':<5}")
 
     @staticmethod
     def print_new_customer_receipt(order: Order, membership_price: float):
@@ -143,9 +156,10 @@ class Main:
 
         :return:
         """
-        TOTAL = order.Total + membership_price
-        print(f"{order.Customer.Name}  |     purchases      | {order.Quantity} x {order.Product.Name}")
-        print(f"Unit price:            |                    | {order.Product.Price} (AUD)")
-        print(f"Membership price:      |                    | {membership_price}(AUD)")
-        print(f"{order.Customer.Name}  | gets a discount of | {order.Discounted_Rate}%")
-        print(f"Total price:           |                    | {TOTAL}(AUD)")
+        print(f"{'Receipt': ^58}")
+        print("=" * 58)
+        print(f"{order.Customer.Name:<20} | {'purchases':^20} | {order.Quantity:<5}x{order.Product.Name:<5}")
+        print(f"{'Unit price:':<20} | {' ':^20} | {order.Product.Price:<5} {'(AUD)':<5}")
+        print(f"{'Membership price:':<20} | {' ':^20} | {membership_price:<5} {'(AUD)':<5}")
+        print(f"{order.Customer.Name:<20} | {'gets a discount of':^20} | {str(order.Discounted_Rate) + '%':<5}{'':<5}")
+        print(f"{'Total price:':<20} | {' ':^20} | {order.Total:<5} {'(AUD)':<5}")
