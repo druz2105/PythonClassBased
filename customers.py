@@ -1,13 +1,25 @@
 class Customers:
 
-    def __init__(self, uni_id: str, name: str, value: float = 0):
-        self.Id = uni_id
+    def __init__(self,
+                 uni_id: str,
+                 name: str,
+                 value: float = 0,
+                 new_entry=False,
+                 member=False,
+                 discount_rate=0,
+                 vip_member=False,
+                 **kwargs):
+        self.uni_id = uni_id
+        self.customer_id = int(uni_id[1:])
         self.Name = name
         self.Value = value
-        self.min_discount = 0
+        self.min_discount = discount_rate
+        self.member = member
+        self.vip_member = vip_member
+        self.new_entry = new_entry
 
     def _get_Id(self):
-        return self.Id
+        return self.uni_id
 
     def _get_Name(self):
         return self.Name
@@ -21,11 +33,20 @@ class Customers:
     def set_Value(self, value: float):
         self.Value = value
 
-    def read_Customers(self):
-        return f"{self.Id}, {self.Name}, {self.min_discount}, {self.Value}"
+    def get_dict(self):
+        data = {
+            "ID": self.customer_id,
+            "uni_id": self.uni_id,
+            "name": self.Name,
+            "discount_rate": self.min_discount,
+            "value": self.Value,
+            "member": self.member,
+            "vip_member": self.vip_member,
+        }
+        return data
 
     def display_info(self):
-        print(f"Id: {self._get_Id()}")
+        print(f"uni_id: {self._get_Id()}")
         print(f"Name: {self._get_Name()}")
         print(f"Value: {self._get_value()}")
 

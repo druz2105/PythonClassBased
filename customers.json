@@ -1,0 +1,74 @@
+[
+  {
+    "ID": 1,
+    "uni_id": "C1",
+    "name": "James",
+    "discount_rate": 0,
+    "value": 680.2,
+    "member": false,
+    "vip_member": false
+  },
+  {
+    "ID": 2,
+    "uni_id": "C2",
+    "name": "Lily",
+    "discount_rate": 0,
+    "value": 102,
+    "member": false,
+    "vip_member": false
+  },
+  {
+    "ID": 3,
+    "uni_id": "M3",
+    "name": "Tom",
+    "discount_rate": 0.05,
+    "value": 250,
+    "member": true,
+    "vip_member": false
+  },
+  {
+    "ID": 5,
+    "uni_id": "V5",
+    "name": "Harry",
+    "discount_rate": 0.125,
+    "value": 600,
+    "member": false,
+    "vip_member": true
+  },
+  {
+    "ID": 8,
+    "uni_id": "C8",
+    "name": "Annie",
+    "discount_rate": 0,
+    "value": 50,
+    "member": false,
+    "vip_member": false
+  },
+  {
+    "ID": 10,
+    "uni_id": "V10",
+    "name": "Sarah",
+    "discount_rate": 0.15,
+    "value": 1420.5,
+    "member": false,
+    "vip_member": true
+  },
+  {
+    "ID": 11,
+    "uni_id": "M11",
+    "name": "Wilson",
+    "discount_rate": 0,
+    "value": 320.5,
+    "member": true,
+    "vip_member": false
+  },
+  {
+    "ID": 12,
+    "uni_id": "M12",
+    "name": "Wilson",
+    "discount_rate": 0.5,
+    "value": 210.5,
+    "member": true,
+    "vip_member": false
+  }
+]

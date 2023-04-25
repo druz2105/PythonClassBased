@@ -1,53 +1,30 @@
-from products import Product
+import json
+
 from customers import Customers
+from products import Product
 
 
 class Records:
     def __init__(self):
         self.list_customers_data = []
         self.list_products_data = []
+        self.customer_index = {}
 
     def read_customers(self):
         try:
-            customers_file = open("customers.txt", "r")
-            customers = customers_file.readlines()
-            for line in customers:
-                line = line.strip()
-                data = line.split(", ")
-                unique_id = data[0][0:1]
-                if unique_id not in ("C", "M", "V"):
-                    continue
-                user_data_dict = {
-                    "uni_id": data[0],
-                    "name": data[1],
-                    "discount_rate": float(data[2]),
-                    "value": float(data[3]),
-                    "member": False,
-                    "vip_member": False,
-                }
-                if unique_id == "M":
-                    user_data_dict["member"] = True
-                elif unique_id == "V":
-                    user_data_dict["vip_member"] = True
-                self.list_customers_data.append(user_data_dict)
+            customers_file = open("customers.json", "r")
+            self.list_customers_data = json.load(customers_file)
+            for (i, data) in enumerate(self.list_customers_data):
+                uni_id = data["uni_id"]
+                self.customer_index[uni_id] = i
             return True
         except FileNotFoundError:
             return False
 
     def read_products(self):
         try:
-            products_file = open("products.txt", "r")
-            products = products_file.readlines()
-            for line in products:
-                line = line.strip()
-                data = line.split(", ")
-                product_data_dict = {
-                    "prod_id": data[0],
-                    "name": data[1],
-                    "price": float(data[2]),
-                    "stock": int(data[3])
-                }
-                self.list_products_data.append(product_data_dict)
+            products_file = open("products.json", "r")
+            self.list_products_data = json.load(products_file)
             return True
         except FileNotFoundError:
             return False
@@ -62,10 +39,10 @@ class Records:
         else:
             return searched_data
 
-    def find_customer_name(self, search: str):
+    def find_customer_name(self, search: str) -> Customers | None:
         for data in self.list_customers_data:
             if search.lower() == data.get("name").lower():
-                return data
+                return Customers(**data)
         return None
 
     def find_product(self, search: str):
@@ -92,50 +69,29 @@ class Records:
 
     @staticmethod
     def list_customers():
-        customers_file = open("customers.txt", "r")
+        customers_file = open("customers.json", "r")
         return customers_file.read()
 
     @staticmethod
     def list_products():
-        products_file = open("products.txt", "r")
+        products_file = open("products.json", "r")
         return products_file.read()
 
-    def write_customer(self, data: str):
-        customers_file = open("customers.txt", "a")
-        customers_file.write("\n")
-        customers_file.write(data)
-        self.read_customers()
+    def create_customer(self, customer: Customers):
+        self.list_customers_data.append(customer.get_dict())
+        customers_file = open("customers.json", "a")
+        json.dump(self.list_customers_data, customers_file)
 
-    @staticmethod
-    def update_customers(customer: Customers):
-        customers_file = open("customers.txt", "r")
-        customers_data = customers_file.readlines()
-        for i in range(len(customers_data)):
-            line = customers_data[i].strip()
-            data = line.split(", ")
-            if data[0] == customer.Id:
-                if customers_data[i] == customers_data[-1]:
-                    customers_data[i] = customer.read_Customers()
-                else:
-                    customers_data[i] = f"{customer.read_Customers()}\n"
+    def update_customers(self, customer: Customers):
+        index = self.customer_index[customer.uni_id]
+        customer_dict = customer.get_dict()
+        self.list_customers_data[index] = customer_dict
+        customers_file = open("customers.json", "w")
+        json.dump(self.list_customers_data, customers_file)
 
-        write_file = open("customers.txt", "w")
-        write_file.writelines(customers_data)
-        write_file.close()
-
-    @staticmethod
-    def update_products(product_id: Product):
-        products_file = open("products.txt", "r")
-        products_data = products_file.readlines()
-        for i in range(len(products_data)):
-            line = products_data[i].strip()
-            data = line.split(", ")
-            if data[0] == product_id.ID:
-                if products_data[i] == products_data[-1]:
-                    products_data[i] = product_id.read_Products()
-                else:
-                    products_data[i] = f"{product_id.read_Products()}\n"
-
-        write_file = open("products.txt", "w")
-        write_file.writelines(products_data)
-        write_file.close()
+    def update_products(self, product: Product):
+        index = product.product_id - 1
+        product_dict = product.get_dict()
+        self.list_products_data[index] = product_dict
+        product_file = open("./products.json", "w")
+        json.dump(self.list_products_data, product_file)

@@ -2,6 +2,7 @@ class Product:
 
     def __init__(self, prod_id: str, name: str, price: float, stock: int):
         self.ID = prod_id
+        self.product_id = int(prod_id[1:])
         self.Name = name
         self.Price = price
         self.Stock = stock
@@ -24,8 +25,14 @@ class Product:
     def set_Stock(self, stock):
         self.Stock = stock
 
-    def read_Products(self):
-        return f"{self.ID}, {self.Name}, {self.Price}, {self.Stock}"
+    def get_dict(self):
+        data = {
+            "prod_id": self.ID,
+            "name": self.Name,
+            "price": self.Price,
+            "stock": self.Stock
+        }
+        return data
 
     def display_info(self):
         print(f"ID: {self._get_Id()}")

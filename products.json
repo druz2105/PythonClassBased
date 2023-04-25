@@ -1,0 +1,122 @@
+[
+  {
+    "prod_id": "P1",
+    "name": "Toaster",
+    "price": 50,
+    "stock": 20
+  },
+  {
+    "prod_id": "P2",
+    "name": "Towel",
+    "price": 20,
+    "stock": 20
+  },
+  {
+    "prod_id": "P3",
+    "name": "Oven",
+    "price": 300,
+    "stock": 50
+  },
+  {
+    "prod_id": "P4",
+    "name": "Kettle",
+    "price": 90.2,
+    "stock": 40
+  },
+  {
+    "prod_id": "P5",
+    "name": "Microwave",
+    "price": 200,
+    "stock": 15
+  },
+  {
+    "prod_id": "P6",
+    "name": "Candle",
+    "price": 5,
+    "stock": 20
+  },
+  {
+    "prod_id": "P7",
+    "name": "Coffee Mug",
+    "price": 10,
+    "stock": 25
+  },
+  {
+    "prod_id": "P8",
+    "name": "Greeting Card",
+    "price": 3,
+    "stock": 50
+  },
+  {
+    "prod_id": "P9",
+    "name": "Scarves",
+    "price": 15,
+    "stock": 15
+  },
+  {
+    "prod_id": "P10",
+    "name": "Photo Frame",
+    "price": 12,
+    "stock": 20
+  },
+  {
+    "prod_id": "P11",
+    "name": "Scented Soap",
+    "price": 8,
+    "stock": 30
+  },
+  {
+    "prod_id": "P12",
+    "name": "Desk Lamp",
+    "price": 25,
+    "stock": 10
+  },
+  {
+    "prod_id": "P13",
+    "name": "Travel Journal",
+    "price": 7,
+    "stock": 40
+  },
+  {
+    "prod_id": "P14",
+    "name": "Reusable Water Bottle",
+    "price": 12,
+    "stock": 25
+  },
+  {
+    "prod_id": "P15",
+    "name": "Throw Pillow",
+    "price": 20,
+    "stock": 15
+  },
+  {
+    "prod_id": "P16",
+    "name": "Essential Oil Diffuser",
+    "price": 30,
+    "stock": 10
+  },
+  {
+    "prod_id": "P17",
+    "name": "Wristwatch",
+    "price": 50,
+    "stock": 5
+  },
+  {
+    "prod_id": "P18",
+    "name": "Earrings",
+    "price": 18,
+    "stock": 20
+  },
+  {
+    "prod_id": "P19",
+    "name": "Faux Plant",
+    "price": 15,
+    "stock": 12
+  },
+  {
+    "prod_id": "P20",
+    "name": "Canvas Tote Bag",
+    "price": 12,
+    "stock": 30
+  }
+]
